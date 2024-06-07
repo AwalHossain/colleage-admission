@@ -10,14 +10,26 @@ import Colleges from './pages/Colleges'
 import Home from './pages/Home'
 import MyCollege from './pages/MyCollege'
 import NotFound from './pages/NotFound'
-import { default as Admission, default as Profile } from './pages/Profile'
+
+import Admission from './pages/Admissin'
+import Profile from './pages/Profile'
+import SignInPage from './pages/SignInPage'
+import SignUpPage from './pages/SignUpPage'
+
+
 
 const queryClient = new QueryClient()
 
 function App() {
+  // Import your publishable key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
   return (
     <QueryClientProvider client={queryClient}>
-      <ClerkProvider>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
         <Router>
           <Layout>
             <Routes>
@@ -27,6 +39,11 @@ function App() {
               <Route path="/admission" element={<Admission />} />
               <Route path="/my-college" element={<MyCollege />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/sign-in" element={<SignInPage />} />
+              <Route path="/sign-up" element={<SignUpPage />} />
+              <Route path="/sign-up/verify-email-address" element={<SignUpPage routing="virtual" />} />
+              <Route path="/sign-in/factor-one" element={<SignInPage routing="virtual" />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
