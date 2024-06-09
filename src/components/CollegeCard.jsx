@@ -1,13 +1,14 @@
 import { StarIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import Image from "./Image";
 const CollegeCard = ({ college }) => {
+  console.log(college, "college form each");
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
-      <img
+      <Image
         className="h-48 w-full object-cover"
         src={college.image}
         alt={college.name}
-        loading="lazy"
       />
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900">{college.name}</h3>
