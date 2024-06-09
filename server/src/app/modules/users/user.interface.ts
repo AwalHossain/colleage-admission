@@ -7,10 +7,7 @@ export type IUser = {
   password: string;
   role: string;
   _id: string;
-  userPrefernce?: UserPref[];
-  readingList?: string[];
-  finishedBooks?: string[];
-
+  token?: string;
 };
 
 export type UserPref = {
@@ -22,6 +19,10 @@ export type UserPref = {
 export type ILoginUserResponse = {
   refreshToken?: string;
   accessToken: string;
+  email: string;
+  role: string;
+  _id: string;
+  name?: string;
 };
 
 export type UserModel = {
