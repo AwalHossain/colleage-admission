@@ -1,10 +1,13 @@
 import { Request, RequestHandler, Response } from 'express';
 import config from '../../../config';
+import ApiError from '../../../errors/ApiError';
+import { jwtHelpers } from '../../../helpers/jwtHelpers';
+import sendMail from '../../../helpers/sendMail';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { ILoginUserResponse } from './user.interface';
 import { User } from './user.model';
 import { UserService } from './user.service';
+
 
 const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
@@ -14,13 +17,6 @@ const createUser: RequestHandler = catchAsync(
     const result = await UserService.createUser(userData);
     // const { refreshToken, ...others } = result;
 
-    // set refresh token into cookie
-    const cookieOptions = {
-      secure: config.env === 'production',
-      httpOnly: true,
-    };
-
-    res.cookie('refreshToken', refreshToken, cookieOptions);
 
     sendResponse(res, {
       statusCode: 200,
@@ -37,15 +33,6 @@ const loginUser: RequestHandler = catchAsync(
     console.log(userData, 'userData');
 
     const result = await UserService.loginUser(userData);
-    // const { others } = result;
-
-    // set refresh token into cookie
-    const cookieOptions = {
-      secure: config.env === 'production',
-      httpOnly: true,
-    };
-
-    res.cookie('refreshToken', refreshToken, cookieOptions);
 
     sendResponse(res, {
       statusCode: 200,
@@ -56,117 +43,105 @@ const loginUser: RequestHandler = catchAsync(
   }
 );
 
-// const userPreference = catchAsync(async (req: Request, res: Response) => {
-//   const user = req.user;
-//   console.log(req.body, 'req.body');
+// send mail using nodemailer
 
-//   const { bookId, status } = req.body;
+const sendResetToken = catchAsync(
+  async (req: Request, res: Response) =>  {
 
-//   const data = {
-//     userId: user?._id,
-//     bookId,
-//     status,
-//   };
+  const user = await User.findOne({ email: req.body.email });
+  if (!user)
+      return res.status(400).send("user with given email doesn't exist");
+    let token;
+  if (!user?.token) {
+    // create a new token
+       token  =  jwtHelpers.createToken({ userId: user._id }, process.env.JWT_SECRET as string, '365d');
+        user.token = token;
+     await user.save();
+  }else{
+    token = user.token;
+  }
 
-//   const result = await UserService.userPreference({ data });
-
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: 'Added to UserPrefer!',
-//     data: result,
-//   });
-// });
-
-const getWishList = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const result = await UserService.getWishList(user);
-
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: 'Gett the wishlist !',
-    data: result,
-  });
-});
-
-const readingList = catchAsync(async (req: Request, res: Response) => {
-  const { bookId } = req.body;
-  const user = req.user;
-  const result = await UserService.readingList(user, bookId);
+  const link = `${config.clientUrl}/reset-password/${user._id}/${token}`;
+  const text = `
+      <div style="text-align: center;">
+        <h1 style="color: #444;">Password Reset</h1>
+        <p style="color: #666 ;">You have requested to reset your password. Click the link below to reset it.</p>
+        <a href="${link}" style="display: inline-block; margin: 20px auto; padding: 10px 20px; color: #fff; background-color: #007BFF; text-decoration: none;">Reset Password</a>
+        <p style="color: #666;">If you did not request this, please ignore this email.</p>
+      </div>
+    `;
+    const subject = "Password Reset";
+  await sendMail(user.email, subject, text);
 
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'Added to Readinglist !',
-    data: result,
+    message: 'Password reset link sent to your email account !',
   });
+
+});
+const forgetPasswordToken = catchAsync(
+  async (req: Request, res: Response) =>  {
+
+  const user = await User.findOne({ email: req.body.email });
+  if (!user){
+    throw new ApiError (401,"user with given email doesn't exist");
+  }
+      
+    let token;
+  if (!user?.token) {
+    // create a new token
+       token  =  jwtHelpers.createToken({ userId: user._id }, process.env.JWT_SECRET as string, '365d');
+        user.token = token;
+     await user.save();
+  }else{
+    token = user.token;
+  }
+
+  const link = `${config.clientUrl}/reset-password/${user._id}/${token}`;
+  const text = `
+      <div style="text-align: center;">
+        <h1 style="color: #444;">Password Reset</h1>
+        <p style="color: #666 ;">You have requested to reset your password. Click the link below to reset it.</p>
+        <a href="${link}" style="display: inline-block; margin: 20px auto; padding: 10px 20px; color: #fff; background-color: #007BFF; text-decoration: none;">Reset Password</a>
+        <p style="color: #666;">If you did not request this, please ignore this email.</p>
+      </div>
+    `;
+    const subject = "Password Reset";
+  await sendMail(user.email, subject, text);
+
+ 
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Password reset link sent to your email account !',
+  });
+
 });
 
-const getReadingList = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const result = await UserService.getReadingList(user);
+// verify token
+
+const verifyToken = catchAsync( async (req: Request, res: Response) => {
+
+  const user = await User.findOne({
+      _id: req.params.id,
+      token: req.params.token,
+  });
+
+  console.log(user, 'user', req.params.id, req.params.token);
+  
+  if (!user?.token)  {
+   throw new ApiError(400, 'Invalid or expired token !');
+  }
+
+  user.password = req.body.password;
+  user.token = '';
+  await user.save();
 
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'get the Readin list !',
-    data: result,
-  });
-});
-
-const getUserPreferences = catchAsync(async (req: Request, res: Response) => {
-  const { bookId } = req.body;
-  const user = req.user;
-  console.log(bookId, 'bookId finished book');
-  const result = await UserService.getUserPreferences(user);
-
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User preferences fetched!',
-    data: result,
-  });
-});
-
-const removeUserPreference = catchAsync(async (req: Request, res: Response) => {
-  const { bookId } = req.params;
-  const user = req.user;
-  console.log(bookId, 'bookId finished book');
-  const result = await UserService.removeUserPreference(user, bookId);
-
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User preferences removed!',
-    data: result,
-  });
-});
-
-const getFinishedBooks = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const result = await UserService.getUserPreferences(user);
-
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: 'Added to wishlist !',
-    data: result,
-  });
-});
-
-const refreshToken = catchAsync(async (req: Request, res: Response) => {
-  const { refreshToken } = req.cookies;
-
-  const result = await UserService.refreshToken(refreshToken);
-
-  // set refresh token into cookie
-
-  sendResponse<ILoginUserResponse>(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User logged in successfully !',
-    data: result,
+    message: 'Password reset successfully !',
   });
 });
 
@@ -186,12 +161,8 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
 export const UserController = {
   createUser,
   loginUser,
-  refreshToken,
   getMe,
-  readingList,
-  getUserPreferences,
-  getFinishedBooks,
-  getWishList,
-  getReadingList,
-  removeUserPreference,
+  sendResetToken,
+  verifyToken,
+  forgetPasswordToken
 };
