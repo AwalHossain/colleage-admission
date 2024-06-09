@@ -17,35 +17,19 @@ router.post(
   validateRequest(UserValidation.loginRegistrationZodSchema),
   UserController.loginUser
 );
+
 router.post(
-  '/refresh-token',
-  validateRequest(UserValidation.refreshTokenZodSchema),
-  auth(ENUM_USER_ROLE.USER),
-  UserController.refreshToken
+  '/reset-password',
+  UserController.sendResetToken
+);
+router.post(
+  '/forget-password',
+  UserController.forgetPasswordToken
 );
 
-// router.post(
-//   '/preference',
-//   auth(ENUM_USER_ROLE.USER),
-//   UserController.userPreference
-// );
-
-router.get(
-  '/preferences',
-  auth(ENUM_USER_ROLE.USER),
-  UserController.getUserPreferences
-);
-
-router.delete(
-  '/remove/preference/:bookId',
-  auth(ENUM_USER_ROLE.USER),
-  UserController.removeUserPreference
-);
-
-router.get(
-  '/finishedBook',
-  auth(ENUM_USER_ROLE.USER),
-  UserController.getFinishedBooks
+router.post(
+  '/reset-password/:id/:token',
+  UserController.verifyToken
 );
 
 router.get('/me', auth(ENUM_USER_ROLE.USER), UserController.getMe);
