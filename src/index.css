@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.react-autosuggest__suggestions-list {
+  max-height: 150px;
+  overflow-y: auto;
+}
