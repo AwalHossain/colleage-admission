@@ -4,14 +4,16 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
-import Layout from './components/Layout'
+
 import CollegeDetails from './pages/CollegeDetails'
 import Colleges from './pages/Colleges'
 import Home from './pages/Home'
 import MyCollege from './pages/MyCollege'
 import NotFound from './pages/NotFound'
 
-import Admission from './pages/Admissin'
+import Layout from './components/Layout'
+import ResetPassword from './components/ResetPassword'
+import Admission from './pages/Admission'
 import Profile from './pages/Profile'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
@@ -43,6 +45,7 @@ if (!PUBLISHABLE_KEY) {
               <Route path="/sign-up" element={<SignUpPage />} />
               <Route path="/sign-up/verify-email-address" element={<SignUpPage routing="virtual" />} />
               <Route path="/sign-in/factor-one" element={<SignInPage routing="virtual" />} />
+              <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
