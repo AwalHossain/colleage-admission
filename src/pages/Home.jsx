@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import CollegeCard from "../components/CollegeCard";
 import ImageGallery from "../components/ImageGallery";
 import ResearchPapers from "../components/ResearchPapers";
 import Reviews from "../components/Review";
@@ -30,23 +29,6 @@ const Home = () => {
               ))}
             </div>
           )} */}
-
-          <div className="mt-12">
-            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-              Featured Colleges
-            </h2>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                colleges
-                  ?.slice(0, 3)
-                  .map((college) => (
-                    <CollegeCard key={college.id} college={college} />
-                  ))
-              )}
-            </div>
-          </div>
 
           <ImageGallery />
           <ResearchPapers />
