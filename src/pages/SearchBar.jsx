@@ -1,7 +1,8 @@
 import { SearchIcon } from "@heroicons/react/outline";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Autosuggest from "react-autosuggest";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { debounce, searchCollege } from "../services/collegeService";
 
 export default function SearchBar() {
@@ -10,41 +11,47 @@ export default function SearchBar() {
   const { data, isLoading } = mutation;
   const colleges = data?.data;
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (colleges) {
-      const collegeNames = colleges.map((college) => college.name);
-      setSuggestions(collegeNames);
+      setSuggestions(colleges);
     }
   }, [colleges]);
 
-  const debouncedSearch = useRef(debounce((value)=> mutation.mutate(value), 500)).current;
+  const debouncedSearch = useRef(
+    debounce((value) => mutation.mutate(value), 200)
+  ).current;
 
   const onCollegeChange = (event, { newValue }) => {
-    setSearchTerm(event.target.value);
-    debouncedSearch(event.target.value);
+    setSearchTerm(newValue);
+    debouncedSearch(newValue);
   };
 
-  const renderSuggestion = (suggestion) => (
-    isLoading ?(
-        <div className="p-2 border border-gray-200 mb-0.3 bg-gray-50 rounded cursor-pointer">
-            Loading...
-        </div>
-    ):(
-    <div className="p-2 border border-gray-200 mb-0.3 bg-gray-50 rounded cursor-pointer">
-      {suggestion}
-    </div>
-    )
-  );
+  const renderSuggestion = (suggestionValue, { isHighlighted }) => {
+    return (
+      <div className={`p-2 border border-gray-200 mb-0.3 bg-gray-50 rounded cursor-pointer ${isHighlighted ? 'bg-gray-200' : ''}`}>
+        {isLoading ? "Loading..." : suggestionValue.name}
+      </div>
+    );
+  };
+
+  const handleSuggestionSelected = (
+    event,
+    { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
+  ) => {
+    if (method === "click" || method === "enter") {
+      setSearchTerm(suggestionValue);
+      navigate(`/colleges/${suggestion.id}`);
+    }
+  };
 
   return (
-    <div>
+    <div className="relative">
       <div className="relative rounded-md shadow-sm">
-        <div className="absolute top-0 bottom-24 left-0 pl-3 flex items-center pointer-events-none">
+        <div className="relativ">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-12"></div>
         </div>
         <Autosuggest
           inputProps={{
@@ -54,13 +61,19 @@ export default function SearchBar() {
             onChange: onCollegeChange,
             id: "search",
             className:
-              "px-2 py-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-3xl",
+              "px-10 py-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-3xl",
             placeholder: "Search for colleges...",
           }}
           suggestions={suggestions}
-          getSuggestionValue={(suggestion) => suggestion}
+          onSuggestionsFetchRequested={({ value }) => {
+            debouncedSearch(value);
+          }}
+          onSuggestionsClearRequested={() => setSuggestions([])}
+          getSuggestionValue={(suggestion) => suggestion.name}
           renderSuggestion={renderSuggestion}
+          onSuggestionSelected={handleSuggestionSelected}
         />
+        </div>
       </div>
     </div>
   );
