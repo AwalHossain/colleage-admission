@@ -18,6 +18,12 @@ router.post(
   UserController.loginUser
 );
 
+router.put(
+  '/update/:id',
+  auth(ENUM_USER_ROLE.USER),
+  UserController.updateProfile
+);
+
 router.post(
   '/reset-password',
   UserController.sendResetToken
@@ -32,6 +38,8 @@ router.post(
   UserController.verifyToken
 );
 
-router.get('/me', auth(ENUM_USER_ROLE.USER), UserController.getMe);
+router.post("/social-media-login", UserController.socialMediaLogin);
+
+router.get('/me', auth(ENUM_USER_ROLE.USER,ENUM_USER_ROLE.ADMIN), UserController.getMe);
 
 export const UserRoutes = router;
