@@ -1,4 +1,5 @@
 import { Request, RequestHandler, Response } from 'express';
+import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
@@ -149,7 +150,9 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
   const id = req.user?._id;
   console.log(id, 'check');
 
-  const user = await User.findById(id).lean();
+  const user = await User.findOne({
+    _id: id
+  })
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -158,11 +161,63 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+
+const socialMediaLogin = catchAsync(async (req: Request, res: Response) => {
+  const { email, name, photoURL } = req.body;
+  console.log(email, name, photoURL, 'email, name, photoURL');
+  
+  let user = await User.findOne({ email });
+
+  if (!user) {
+    user = await User.create({ email, name, photoURL });
+  }
+  console.log(user, 'user');
+  
+  const { role, _id } = user;
+  const accessToken = jwtHelpers.createToken(
+    { email, role, _id },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string
+  );
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User logged in successfully !',
+    data: { accessToken, ...user.toJSON() },
+  });
+});
+
+
+// update user profile 
+
+const updateProfile = catchAsync(async (req: Request, res: Response) => {
+
+  const {id} = req.params;
+
+  console.log(id, 'id hey');
+  
+    
+  const user = await User.findOneAndUpdate({ _id: id}, req.body, { new: true });
+  console.log(user, 'user');
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User profile updated successfully !',
+    data: user,
+  });
+
+})
+
 export const UserController = {
   createUser,
   loginUser,
   getMe,
   sendResetToken,
   verifyToken,
-  forgetPasswordToken
+  forgetPasswordToken,
+  socialMediaLogin,
+  updateProfile
 };
