@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 import { IUser, UserModel } from './user.interface';
 
 const authSchema = new Schema<IUser>({
@@ -14,7 +14,6 @@ const authSchema = new Schema<IUser>({
   },
   password: {
     type: String,
-    required: true,
     select: false
   },
   role: {
@@ -24,8 +23,18 @@ const authSchema = new Schema<IUser>({
   },
   token:{
     type:String
-  }
+  },
+  photoURL:{
+    type:String,
+  },
+  myCollege:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Admission',
+  }]
+},
+{
+  timestamps: true,
+}
+);
 
-});
-
-export const User = model<IUser, UserModel>('auth', authSchema);
+export const User = model<IUser, UserModel>('Auth', authSchema);
