@@ -8,6 +8,8 @@ export type IUser = {
   role: string;
   _id: string;
   token?: string;
+  photoURL?: string;
+  myCollege?: string;
 };
 
 export type UserPref = {
