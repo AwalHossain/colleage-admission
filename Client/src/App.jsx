@@ -1,7 +1,6 @@
 
 // src/App.jsx
-import { ClerkProvider } from '@clerk/clerk-react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
 
@@ -11,47 +10,57 @@ import Home from './pages/Home'
 import MyCollege from './pages/MyCollege'
 import NotFound from './pages/NotFound'
 
+import { useEffect } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import Layout from './components/Layout'
-import ResetPassword from './components/ResetPassword'
+import ResetPassword from './components/resetPassoword/ResetPassword'
+import { getFromLocalStorage } from './lib/local-storage'
+import PrivateRoutes from './middleware/PrivateRoutes'
 import Admission from './pages/Admission'
 import Profile from './pages/Profile'
 import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
-
-
-
-const queryClient = new QueryClient()
+import useAuth from './zustand/authStore'
 
 function App() {
-  // Import your publishable key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+  const { setUser } = useAuth();
 
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
-}
+
+  useEffect(() => {
+    const storedUser = getFromLocalStorage("user");
+
+      setUser(storedUser);
+  
+  }, [setUser]);
+
+
+const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+
         <Router>
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/colleges" element={<Colleges />} />
               <Route path="/colleges/:collegeId" element={<CollegeDetails />} />
-              <Route path="/admission" element={<Admission />} />
-              <Route path="/my-college" element={<MyCollege />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/sign-in" element={<SignInPage />} />
               <Route path="/sign-up" element={<SignUpPage />} />
               <Route path="/sign-up/verify-email-address" element={<SignUpPage routing="virtual" />} />
               <Route path="/sign-in/factor-one" element={<SignInPage routing="virtual" />} />
               <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
-
+                {/* private Routes */}
+                <Route element={<PrivateRoutes />}>
+              <Route path="/admission" element={<Admission />} />
+            <Route path="/my-college" element={<MyCollege />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          {/* not found */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
         </Router>
-      </ClerkProvider>
     </QueryClientProvider>
   )
 }
