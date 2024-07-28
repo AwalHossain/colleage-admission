@@ -1,15 +1,18 @@
 
-import { useUser } from '@clerk/clerk-react'
-import { useState } from 'react'
-import Navbar from './Navbar'
+
+import { useState } from 'react';
+import useAuth from '../zustand/authStore';
+import Navbar from './Navbar';
 
 const Layout = ({ children }) => {
     const [isNavOpen, setIsNavOpen] = useState(false)
-    const { isSignedIn } = useUser()
+    // const { isSignedIn } = 
+    const { user, isSignedIn } = useAuth();
+    console.log(user, "isSignedIn", isSignedIn);
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Navbar isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} isSignedIn={isSignedIn} />
+            <Navbar isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen}  />
 
             <main className="flex-grow">{children}</main>
 
