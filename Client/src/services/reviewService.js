@@ -1,3 +1,8 @@
+import axios from "axios";
+import { toast } from "react-toastify";
+import { BASE_API_URL } from "../config";
+import { getFromLocalStorage } from "../lib/local-storage";
+
 const mockReviews = [
   {
     id: 1,
@@ -30,8 +35,30 @@ const mockReviews = [
   },
 ];
 
+export const postReview = async (review) => {
+  const token = getFromLocalStorage("token");
+  try {
+    const response = await axios.post(`${BASE_API_URL}/review/post`, review, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+    toast.error("Error: " + "Something went wrong");
+    return err.response;
+  }
+};
+
 export const fetchReviews = async () => {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return mockReviews;
+  try {
+    const response = await axios.get(`${BASE_API_URL}/review/all`);
+    console.log(response, "from fetchReview");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
