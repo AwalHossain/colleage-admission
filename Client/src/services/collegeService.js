@@ -14,7 +14,7 @@ const mockColleges = [
     id: 1,
     name: "Harvard University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/university-6699377_1280.jpg",
+      "https://i.ibb.co/Vj51Rvg/michael-marsh-U0d-BV-Qei-Yk-unsplash-19-11zon.jpg",
     rating: 5,
     admissionDate: "2024-08-15",
     researchCount: 1200,
@@ -51,7 +51,7 @@ const mockColleges = [
     id: 2,
     name: "Indian Institute of Technology Bombay",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/arun-chandran-xOSMdivrcFM-unsplash.jpg",
+      "https://i.ibb.co/mCn870d/dora-dalberto-ORz-Zt-Y2i50k-unsplash-9-11zon.jpg",
     rating: 4.5,
     admissionDate: "2024-07-01",
     researchCount: 850,
@@ -87,8 +87,7 @@ const mockColleges = [
   {
     id: 3,
     name: "University of Dhaka",
-    image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/Dhaka_UNI_02.avif",
+    image: "https://i.ibb.co/yYjY5Vv/Dhaka-UNI-02-6-11zon.jpg",
     rating: 4.2,
     admissionDate: "2024-07-15",
     researchCount: 620,
@@ -125,7 +124,7 @@ const mockColleges = [
     id: 4,
     name: "Stanford University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/casey-olsen-NlFyPKxXORo-unsplash.jpg",
+      "https://i.ibb.co/NTvf5RG/casey-olsen-Nl-Fy-PKx-XORo-unsplash-2-11zon.jpg",
     rating: 5,
     admissionDate: "2024-08-01",
     researchCount: 1350,
@@ -162,7 +161,7 @@ const mockColleges = [
     id: 5,
     name: "University of Cambridge",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/einar-h-reynis-YW1i_xi8dt8-unsplash.jpg",
+      "https://i.ibb.co/sCBN4Bq/einar-h-reynis-YW1i-xi8dt8-unsplash-10-11zon.jpg",
     rating: 4.9,
     admissionDate: "2024-07-20",
     researchCount: 1100,
@@ -198,8 +197,7 @@ const mockColleges = [
   {
     id: 6,
     name: "University of Chittagong",
-    image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/Dhaka_UNI_03.avif",
+    image: " https://i.ibb.co/dgySBLH/Dhaka-UNI-03-7-11zon.jpg",
     rating: 3.8,
     admissionDate: "2024-07-10",
     researchCount: 450,
@@ -236,7 +234,7 @@ const mockColleges = [
     id: 7,
     name: "Massachusetts Institute of Technology (MIT)",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/divyansh-jain--BA1r4Rf_zM-unsplash.jpg",
+      "https://i.ibb.co/BfzpnjJ/divyansh-jain-BA1r4-Rf-z-M-unsplash-8-11zon.jpg",
     rating: 5,
     admissionDate: "2024-08-10",
     researchCount: 1500,
@@ -273,7 +271,7 @@ const mockColleges = [
     id: 8,
     name: "University of Rajshahi",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/dora-dalberto-ORzZtY2i50k-unsplash.jpg",
+      "https://i.ibb.co/mCn870d/dora-dalberto-ORz-Zt-Y2i50k-unsplash-9-11zon.jpg",
     rating: 4.1,
     admissionDate: "2024-07-25",
     researchCount: 550,
@@ -310,7 +308,7 @@ const mockColleges = [
     id: 9,
     name: "University of Oxford",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/jane-last-k60YOEjB75k-unsplash.jpg",
+      "https://i.ibb.co/pyJtB05/jane-last-k60-YOEj-B75k-unsplash-13-11zon.jpg",
     rating: 4.9,
     admissionDate: "2024-07-30",
     researchCount: 1250,
@@ -347,7 +345,7 @@ const mockColleges = [
     id: 10,
     name: "University of Khulna",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/istockphoto-1367931228-1024x1024.jpg",
+      "https://i.ibb.co/1dHCbLM/istockphoto-1367931228-1024x1024-12-11zon.jpg",
     rating: 3.7,
     admissionDate: "2024-07-05",
     researchCount: 380,
@@ -384,7 +382,7 @@ const mockColleges = [
     id: 11,
     name: "California Institute of Technology (Caltech)",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/istockphoto-475315086-1024x1024.jpg",
+      "https://i.ibb.co/TbdrwVQ/istockphoto-475315086-1024x1024-11-11zon.jpg",
     rating: 4.9,
     admissionDate: "2024-08-05",
     researchCount: 1400,
@@ -421,7 +419,7 @@ const mockColleges = [
     id: 12,
     name: "University of Barisal",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/jean-luc-benazet-VJ4N18Lq2JQ-unsplash.jpg",
+      "https://i.ibb.co/Vj51Rvg/michael-marsh-U0d-BV-Qei-Yk-unsplash-19-11zon.jpg",
     rating: 3.5,
     admissionDate: "2024-07-12",
     researchCount: 320,
@@ -458,7 +456,7 @@ const mockColleges = [
     id: 13,
     name: "University of Chicago",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/keming-tan-xMygEKgsnes-unsplash.jpg",
+      "https://i.ibb.co/09cYFBC/darya-tryfanava-d55fh-Ar-DES0-unsplash-4-11zon.jpg",
     rating: 4.8,
     admissionDate: "2024-08-20",
     researchCount: 1150,
@@ -495,7 +493,7 @@ const mockColleges = [
     id: 14,
     name: "University of Comilla",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/m-GvPceVqbxm4-unsplash.jpg",
+      "https://i.ibb.co/ZKLWRpN/jean-luc-benazet-VJ4-N18-Lq2-JQ-unsplash-14-11zon.jpg",
     rating: 3.6,
     admissionDate: "2024-07-18",
     researchCount: 280,
@@ -532,7 +530,7 @@ const mockColleges = [
     id: 15,
     name: "Princeton University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/malothu-santhosh-9jcbVG_Dzh8-unsplash.jpg",
+      "https://i.ibb.co/vQc20fx/malothu-santhosh-9jcb-VG-Dzh8-unsplash-16-11zon.jpg",
     rating: 4.9,
     admissionDate: "2024-08-12",
     researchCount: 1300,
@@ -569,7 +567,7 @@ const mockColleges = [
     id: 16,
     name: "University of Rangpur",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/manohar-manu-hNsYIjUeXJw-unsplash.jpg",
+      "https://i.ibb.co/fN6jGW1/manohar-manu-h-Ns-YIj-Ue-XJw-unsplash-17-11zon.jpg",
     rating: 3.4,
     admissionDate: "2024-07-22",
     researchCount: 250,
@@ -606,7 +604,7 @@ const mockColleges = [
     id: 17,
     name: "Columbia University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/michael-marsh-U0dBV_QeiYk-unsplash.jpg",
+      "https://i.ibb.co/Vj51Rvg/michael-marsh-U0d-BV-Qei-Yk-unsplash-19-11zon.jpg",
     rating: 4.8,
     admissionDate: "2024-08-18",
     researchCount: 1250,
@@ -643,7 +641,7 @@ const mockColleges = [
     id: 18,
     name: "University of Jagannath",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/muzammil-soorma-9MByoiBNN1c-unsplash.jpg",
+      "https://i.ibb.co/87zr2Xq/deepak-shukla-f-BIqryv8-AL4-unsplash-5-11zon.jpg",
     rating: 3.2,
     admissionDate: "2024-07-28",
     researchCount: 220,
@@ -680,7 +678,7 @@ const mockColleges = [
     id: 19,
     name: "Yale University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/porter-raab-gnj9vj--FRY-unsplash.jpg",
+      "https://i.ibb.co/Gntv8w2/chenyu-guan-Xgcd-AE1-Gqlg-unsplash-3-11zon.jpg",
     rating: 4.9,
     admissionDate: "2024-08-25",
     researchCount: 1180,
@@ -717,7 +715,7 @@ const mockColleges = [
     id: 20,
     name: "Jahangirnagar University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/timothy-kassis-Qj-5RbUb1UE-unsplash.jpg",
+      "https://i.ibb.co/mCn870d/dora-dalberto-ORz-Zt-Y2i50k-unsplash-9-11zon.jpg",
     rating: 4,
     admissionDate: "2024-07-30",
     researchCount: 480,
@@ -751,47 +749,10 @@ const mockColleges = [
     ],
   },
   {
-    id: 21,
-    name: "University of Pennsylvania",
-    image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/vadim-sherbakov-d6ebY-faOO0-unsplash.jpg",
-    rating: 4.7,
-    admissionDate: "2024-08-22",
-    researchCount: 1100,
-    description:
-      "The University of Pennsylvania is a private Ivy League research university in Philadelphia. It is one of the oldest and most prestigious universities in the United States, known for its academic excellence, interdisciplinary approach, and innovative research.",
-    admissionProcess: [
-      "Step 1: Submit the Coalition Application or Common Application, along with transcripts, test scores, and other required documents.",
-      "Step 2: Take the SAT or ACT, and optionally, submit SAT Subject Test scores.",
-      "Step 3: Participate in the alumni interview process, if offered.",
-      "Step 4: Wait for the admission decision, which is typically released in late March or early April.",
-    ],
-    events: [
-      "Penn Relays",
-      "Penn Wharton Entrepreneurship Events",
-      "Penn Student Film Festival",
-      "Penn Engineering Design Showcases",
-      "TEDxPenn",
-      "Hackathons",
-      "Research Symposiums",
-      "Cultural Festivals",
-    ],
-    sports: [
-      "Basketball",
-      "Football",
-      "Baseball",
-      "Soccer",
-      "Lacrosse",
-      "Tennis",
-      "Track and Field",
-      "Crew",
-    ],
-  },
-  {
     id: 22,
     name: "Islamic University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/deepak-shukla-fBIqryv8AL4-unsplash.jpg",
+      "https://i.ibb.co/NTvf5RG/casey-olsen-Nl-Fy-PKx-XORo-unsplash-2-11zon.jpg",
     rating: 3.9,
     admissionDate: "2024-07-15",
     researchCount: 360,
@@ -828,7 +789,7 @@ const mockColleges = [
     id: 23,
     name: "University of California, Berkeley",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/chenyu-guan-XgcdAE1Gqlg-unsplash.jpg",
+      "https://i.ibb.co/mCn870d/dora-dalberto-ORz-Zt-Y2i50k-unsplash-9-11zon.jpg",
     rating: 4.8,
     admissionDate: "2024-08-10",
     researchCount: 1350,
@@ -865,7 +826,7 @@ const mockColleges = [
     id: 24,
     name: "Bangabandhu Sheikh Mujibur Rahman Maritime University",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/darya-tryfanava-d55fhArDES0-unsplash.jpg",
+      "https://i.ibb.co/09cYFBC/darya-tryfanava-d55fh-Ar-DES0-unsplash-4-11zon.jpg",
     rating: 3.7,
     admissionDate: "2024-07-20",
     researchCount: 300,
@@ -902,7 +863,7 @@ const mockColleges = [
     id: 25,
     name: "University of California, Los Angeles (UCLA)",
     image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/chenyu-guan-XgcdAE1Gqlg-unsplash.jpg",
+      "https://i.ibb.co/1dHCbLM/istockphoto-1367931228-1024x1024-12-11zon.jpg",
     rating: 4.7,
     admissionDate: "2024-08-15",
     researchCount: 1200,
@@ -935,126 +896,16 @@ const mockColleges = [
       "Gymnastics",
     ],
   },
-  {
-    id: 26,
-    name: "University of Michigan",
-    image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/chenyu-guan-XgcdAE1Gqlg-unsplash.jpg",
-    rating: 4.7,
-    admissionDate: "2024-08-20",
-    researchCount: 1150,
-    description:
-      "The University of Michigan is a public research university in Ann Arbor, Michigan. It is one of the most prestigious and highly ranked universities in the United States, known for its academic excellence, research impact, and strong alumni network.",
-    admissionProcess: [
-      "Step 1: Submit the University of Michigan Application, along with transcripts, test scores, and other required documents.",
-      "Step 2: Take the SAT or ACT, and optionally, submit SAT Subject Test scores.",
-      "Step 3: Participate in the evaluative interview process, if offered.",
-      "Step 4: Wait for the admission decision, which is typically released in late March or early April.",
-    ],
-    events: [
-      "University of Michigan Homecoming",
-      "Michigan Entrepreneurship Events",
-      "Michigan Student Film Festival",
-      "Michigan Engineering Showcases",
-      "TEDxUofM",
-      "Hackathons",
-      "Research Symposiums",
-      "Cultural Festivals",
-    ],
-    sports: [
-      "Basketball",
-      "Football",
-      "Baseball",
-      "Soccer",
-      "Softball",
-      "Tennis",
-      "Track and Field",
-      "Gymnastics",
-    ],
-  },
-  {
-    id: 27,
-    name: "Bangabandhu Sheikh Mujibur Rahman Aviation and Aerospace University",
-    image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/darya-tryfanava-d55fhArDES0-unsplash.jpg",
-    rating: 3.8,
-    admissionDate: "2024-07-25",
-    researchCount: 320,
-    description:
-      "Bangabandhu Sheikh Mujibur Rahman Aviation and Aerospace University is a public university located in Dhaka, Bangladesh. Established in 2019, it specializes in aviation and aerospace education and research, offering undergraduate and graduate programs related to aeronautical engineering, air traffic management, and aviation management.",
-    admissionProcess: [
-      "Step 1: Pass the Higher Secondary Certificate (HSC) or equivalent examination and secure the required GPA.",
-      "Step 2: Apply online or submit the application form with required documents and fees.",
-      "Step 3: Appear for the admission test and/or viva voce, if applicable.",
-      "Step 4: Wait for the merit list and complete the admission formalities if selected.",
-    ],
-    events: [
-      "Convocation Ceremony",
-      "Freshers' Welcome",
-      "Inter-University Sports",
-      "Cultural Festival",
-      "Career Fair",
-      "Alumni Reunion",
-      "Research Symposium",
-      "Aviation and Aerospace Exhibitions",
-    ],
-    sports: [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Volleyball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics",
-      "Swimming",
-    ],
-  },
-  {
-    id: 28,
-    name: "University of Toronto",
-    image:
-      "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/chenyu-guan-XgcdAE1Gqlg-unsplash.jpg",
-    rating: 4.6,
-    admissionDate: "2024-08-18",
-    researchCount: 1100,
-    description:
-      "The University of Toronto is a public research university in Toronto, Ontario, Canada. It is one of the most prestigious and highly ranked universities in the world, known for its academic excellence, research impact, and diverse student community.",
-    admissionProcess: [
-      "Step 1: Submit the University of Toronto Application, along with transcripts, test scores (if required), and other required documents.",
-      "Step 2: Take the required standardized tests (SAT, ACT, or AP exams) if applicable.",
-      "Step 3: Participate in the evaluative interview process, if offered.",
-      "Step 4: Wait for the admission decision, which is typically released in late March or early April.",
-    ],
-    events: [
-      "University of Toronto Homecoming",
-      "UofT Entrepreneurship Events",
-      "UofT Student Film Festival",
-      "UofT Engineering Showcases",
-      "TEDxUofT",
-      "Hackathons",
-      "Research Symposiums",
-      "Cultural Festivals",
-    ],
-    sports: [
-      "Basketball",
-      "Football",
-      "Baseball",
-      "Soccer",
-      "Ice Hockey",
-      "Tennis",
-      "Track and Field",
-      "Rowing",
-    ],
-  },
 ];
 
 export const fetchColleges = async () => {
   // Simulate network delay
+  // const response = await axios.get(`${BASE_API_URL}/college/all`);
+  // console.log(response);
+  // const colleges = response.data?.data;
+  // return colleges;
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  const response = await axios.get(`${BASE_API_URL}/college/all`);
-  console.log(response);
-  const colleges = response.data?.data;
-  return colleges;
+  return mockColleges;
 };
 
 export const fetchMyColleges = async () => {
