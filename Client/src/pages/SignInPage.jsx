@@ -1,15 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ForgetPassModal from "../components/ForgetPassModal";
+import ForgetPassModal from "../components/resetPassoword/ForgetPassModal";
 import { Dialog, DialogTrigger } from "../components/ui/dialog";
+import { setToLocalStorage } from "../lib/local-storage";
 import { fetchLogin } from "../services/authService";
+import useAuth from "../zustand/authStore";
+import SocialMediaLogin from "./SocialMediaLogin";
 
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const {setUser} = useAuth(state => state);
+  const navigate = useNavigate();
 
 const handleLogin = async (e) => {
   e.preventDefault();
@@ -21,6 +26,9 @@ const handleLogin = async (e) => {
     if(res.data.statusCode === 200){
       setLoading(false);
       toast.success(res.data.message);
+      setToLocalStorage('token', res.data.data.accessToken);
+      setUser(res.data.data);
+      navigate('/');
       console.log('User:', res.data.data);
     } 
 
@@ -75,6 +83,9 @@ const handleLogin = async (e) => {
             }
           </div>
         </form>
+        <div>
+          <SocialMediaLogin />
+        </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
 
