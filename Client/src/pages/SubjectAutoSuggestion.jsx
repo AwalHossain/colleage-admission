@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 const subjectNames = [
     'Mathematics',
@@ -123,7 +123,7 @@ export default function SubjectAutoSuggestion({ formData, setFormData}) {
 
   const onCollegeChange = (event, { newValue }) => {
     setCollegeInput(newValue);
-    setFormData({ ...formData, subjectName: newValue });
+    setFormData({ ...formData, subject: newValue });
   };
 
   const renderSuggestion = (suggestion) => (
