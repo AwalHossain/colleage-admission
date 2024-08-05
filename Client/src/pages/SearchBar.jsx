@@ -63,8 +63,10 @@ export default function SearchBar() {
             className:
               "px-10 py-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-3xl",
             placeholder: "Search for colleges...",
+            onFocus: () => setSuggestions([]),
+            onBlur: () => setTimeout(() => setSuggestions([]), 200),
           }}
-          suggestions={suggestions}
+          suggestions={isLoading ? [{name: "Loading..."}] : suggestions}
           onSuggestionsFetchRequested={({ value }) => {
             debouncedSearch(value);
           }}
@@ -72,6 +74,7 @@ export default function SearchBar() {
           getSuggestionValue={(suggestion) => suggestion.name}
           renderSuggestion={renderSuggestion}
           onSuggestionSelected={handleSuggestionSelected}
+          alwaysRenderSuggestions={true}
         />
         </div>
       </div>
