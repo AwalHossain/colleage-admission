@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { fetchProfile, updateProfile } from '../services/ProfileService'
+import { useMutation, useQueryClient } from 'react-query'
+import { updateProfile } from '../services/ProfileService'
+import useAuth from '../zustand/authStore'
 
 const Profile = () => {
+  const {user:profile} = useAuth()
+  console.log(profile,"user");
  const queryClient = useQueryClient()
- const { data: profile, isLoading } = useQuery('profile', fetchProfile)
+//  const { data: profile, isLoading } = useQuery('profile', fetchProfile)
  const { mutate: updateProfileMutation } = useMutation(updateProfile, {
    onSuccess: () => {
      queryClient.invalidateQueries('profile')
@@ -41,10 +44,10 @@ const Profile = () => {
  const handleCancelClick = () => {
    setEditMode(false)
    setFormData({
-     name: profile.name,
-     email: profile.email,
-     university: profile.university,
-     address: profile.address,
+     name: profile?.name,
+     email: profile?.email,
+     university: profile?.university,
+     address: profile?.address,
    })
  }
 
@@ -52,10 +55,7 @@ const Profile = () => {
    <div className="bg-gray-100">
      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
        <div className="py-12">
-         {isLoading ? (
-           <p>Loading...</p>
-         ) : (
-           <div>
+       <div>
              <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                Profile
              </h2>
@@ -80,7 +80,7 @@ const Profile = () => {
                            onChange={handleChange}
                          />
                        ) : (
-                         <p className="mt-1 text-sm text-gray-500">{profile.name}</p>
+                         <p className="mt-1 text-sm text-gray-500">{profile?.name}</p>
                        )}
                      </div>
                      <div>
@@ -100,7 +100,7 @@ const Profile = () => {
                            onChange={handleChange}
                          />
                        ) : (
-                         <p className="mt-1 text-sm text-gray-500">{profile.email}</p>
+                         <p className="mt-1 text-sm text-gray-500">{profile?.email}</p>
                        )}
                      </div>
                    </div>
@@ -122,7 +122,7 @@ const Profile = () => {
                            onChange={handleChange}
                          />
                        ) : (
-                         <p className="mt-1 text-sm text-gray-500">{profile.university}</p>
+                         <p className="mt-1 text-sm text-gray-500">{profile?.university}</p>
                        )}
                      </div>
                      <div>
@@ -137,12 +137,12 @@ const Profile = () => {
                            type="text"
                            name="address"
                            id="address"
-                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                           className="mt-1 block w-full shadow-md sm:text-sm border-2 border-gray-900 rounded-md"
                            value={formData.address}
                            onChange={handleChange}
                          />
                        ) : (
-                         <p className="mt-1 text-sm text-gray-500">{profile.address}</p>
+                         <p className="mt-1 text-sm text-gray-500">{profile?.address}</p>
                        )}
                      </div>
                    </div>
@@ -178,7 +178,6 @@ const Profile = () => {
                </div>
              </div>
            </div>
-         )}
        </div>
      </div>
    </div>
