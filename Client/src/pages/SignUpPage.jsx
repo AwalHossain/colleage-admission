@@ -1,9 +1,11 @@
 
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setToLocalStorage } from "../lib/local-storage";
 import { fetchRegister } from "../services/authService";
+import useAuth from "../zustand/authStore";
 
 
 const SignUpPage = () => {
@@ -11,6 +13,8 @@ const SignUpPage = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
+  const {setUser} = useAuth(state => state);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,7 +25,10 @@ const SignUpPage = () => {
   
       if(res.data.statusCode === 200){
         setLoading(false);
-        toast.success("Account created successfully");
+        toast.success(res.data.message);
+        setToLocalStorage('token', res.data.data.accessToken);
+        setUser(res.data.data);
+        navigate('/');
       } 
   
       console.log(res.data, "just err checking");
