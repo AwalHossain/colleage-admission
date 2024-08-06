@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import CollegeCard from '../components/CollegeCard';
+import { Spinner } from '../lib/loading';
 import { fetchColleges } from '../services/collegeService';
 
 const Colleges = () => {
@@ -13,7 +14,7 @@ const Colleges = () => {
             All Colleges
           </h2>
           {isLoading ? (
-            <p className="text-center text-gray-600">Loading...</p>
+            <Spinner className="middle" />
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {colleges?.map((college) => (
