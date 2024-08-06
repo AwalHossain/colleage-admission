@@ -2,37 +2,63 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import SportsCarousel from '../components/carousel/SportsCarousel';
 import Image from '../components/Image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../components/ui/carousel';
+import useScrollToTop from '../helpers/scrollToTop';
 import { fetchCollegeDetails } from '../services/collegeService';
 
 const sportsImage =  [
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/sports/braden-collum-ttbCwN_mWic-unsplash.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/sports/istockphoto-1278976828-1024x1024.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/sports/jeffrey-f-lin-CUK8i7lr3l8-unsplash.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/sports/philippa-rose-tite-93YYkxujyus-unsplash.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/sports/philippa-rose-tite-X1zuCXKwCy8-unsplash.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/sports/riley-mccullough-iezcEpGuYdE-unsplash.jpg"
-      
- ]
+  "https://i.ibb.co/4VC0PPm/braden-collum-ttb-Cw-N-m-Wic-unsplash-1-11zon.jpg",
+  "https://i.ibb.co/gWygPKn/istockphoto-1278976828-1024x1024-2-11zon.jpg",
+  "https://i.ibb.co/6mKqfvr/jeffrey-f-lin-CUK8i7lr3l8-unsplash-3-11zon.jpg",
+  "https://i.ibb.co/Bz6Pdsk/philippa-rose-tite-93-YYkxujyus-unsplash-4-11zon.jpg",
+  "https://i.ibb.co/fnHK1j6/philippa-rose-tite-X1zu-CXKw-Cy8-unsplash-5-11zon.jpg",
+  "https://i.ibb.co/m6kwjTn/riley-mccullough-iezc-Ep-Gu-Yd-E-unsplash-6-11zon.jpg"
+];
 
 const collegeImage = [
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/timothy-kassis-Qj-5RbUb1UE-unsplash.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/university-6699377_1280.jpg",
-"https://video-gka8dxaqb0babzct.z01.azurefd.net/college-phot/vadim-sherbakov-d6ebY-faOO0-unsplash.jpg"
-]
+  "https://i.ibb.co/Vj51Rvg/michael-marsh-U0d-BV-Qei-Yk-unsplash-19-11zon.jpg",
+  "https://i.ibb.co/TbdrwVQ/istockphoto-475315086-1024x1024-11-11zon.jpg",
+  "https://i.ibb.co/1dHCbLM/istockphoto-1367931228-1024x1024-12-11zon.jpg",
+  "https://i.ibb.co/pyJtB05/jane-last-k60-YOEj-B75k-unsplash-13-11zon.jpg",
+  "https://i.ibb.co/ZKLWRpN/jean-luc-benazet-VJ4-N18-Lq2-JQ-unsplash-14-11zon.jpg",
+  "https://i.ibb.co/K714HhJ/keming-tan-x-Myg-EKgsnes-unsplash-15-11zon.jpg",
+  "https://i.ibb.co/vQc20fx/malothu-santhosh-9jcb-VG-Dzh8-unsplash-16-11zon.jpg",
+  "https://i.ibb.co/fN6jGW1/manohar-manu-h-Ns-YIj-Ue-XJw-unsplash-17-11zon.jpg",
+  "https://i.ibb.co/MCK15Wy/m-Gv-Pce-Vqbxm4-unsplash-18-11zon.jpg",
+  "https://i.ibb.co/yYjY5Vv/Dhaka-UNI-02-6-11zon.jpg",
+  "https://i.ibb.co/dgySBLH/Dhaka-UNI-03-7-11zon.jpg",
+  "https://i.ibb.co/BfzpnjJ/divyansh-jain-BA1r4-Rf-z-M-unsplash-8-11zon.jpg",
+  "https://i.ibb.co/mCn870d/dora-dalberto-ORz-Zt-Y2i50k-unsplash-9-11zon.jpg",
+  "https://i.ibb.co/sCBN4Bq/einar-h-reynis-YW1i-xi8dt8-unsplash-10-11zon.jpg",
+  "https://i.ibb.co/9WcTZQ3/arun-chandran-x-OSMdivrc-FM-unsplash-1-11zon.jpg",
+  "https://i.ibb.co/NTvf5RG/casey-olsen-Nl-Fy-PKx-XORo-unsplash-2-11zon.jpg",
+  "https://i.ibb.co/Gntv8w2/chenyu-guan-Xgcd-AE1-Gqlg-unsplash-3-11zon.jpg",
+  "https://i.ibb.co/09cYFBC/darya-tryfanava-d55fh-Ar-DES0-unsplash-4-11zon.jpg",
+  "https://i.ibb.co/87zr2Xq/deepak-shukla-f-BIqryv8-AL4-unsplash-5-11zon.jpg"
+];
+
 
 const eventImages = [
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/istockphoto-1340342476-1024x1024.jpg",
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/istockphoto-1353372838-1024x1024.jpg",
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/istockphoto-1368496779-1024x1024.jpg",
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/istockphoto-1456729829-1024x1024.jpg",
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/istockphoto-1739895622-1024x1024.jpg",
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/istockphoto-597957846-1024x1024.jpg",
-  "https://video-gka8dxaqb0babzct.z01.azurefd.net/events/pang-yuhao-_kd5cxwZOK4-unsplash.jpg",
-
+  "https://i.ibb.co/Px4H0tm/istockphoto-597957846-1024x1024.jpg",
+  "https://i.ibb.co/YT9LvYK/istockphoto-597958786-1024x1024.jpg",
+  "https://i.ibb.co/FK2QC0W/istockphoto-1368496779-1024x1024.jpg",
+  "https://i.ibb.co/zxgbRHh/istockphoto-1456729829-1024x1024.jpg",
+  "https://i.ibb.co/gTb73wQ/pang-yuhao-kd5cxw-ZOK4-unsplash.jpg",
+  "https://i.ibb.co/smh1cJw/rut-miit-YIdk-Wyn-Jd-Sk-unsplash.jpg",
+  "https://i.ibb.co/6DYkC5m/university-105709-1280.jpg"
 ];
+
+// Get 3 random images from collegeImage array
+const getRandomImages = () => {
+  let images = [];
+  while(images.length < 3){
+    let r = Math.floor(Math.random() * collegeImage.length);
+    if(images.indexOf(collegeImage[r]) === -1) images.push(collegeImage[r]);
+  }
+  return images;
+}
 
 const CollegeDetails = () => {
   const { collegeId } = useParams();
@@ -44,6 +70,10 @@ const CollegeDetails = () => {
     }
   );
   const [mainImage, setMainImage] = useState(college?.image || '');
+
+  const randomImages = getRandomImages();
+
+  useScrollToTop();
 
   return (
     <div className="min-h-screen">
@@ -58,7 +88,7 @@ const CollegeDetails = () => {
               className="w-full md:h-[500px] xl:h-[550px] object-cover"
             />
             <div className="absolute -bottom-32 left-0 right-0 flex justify-center gap-4 mb-4">
-              {collegeImage.map((image, index) =>{
+              {randomImages.map((image, index) =>{
                 console.log(image, "image");
                 return(
                   <img
@@ -113,26 +143,7 @@ const CollegeDetails = () => {
 
             <div className="mt-8 ">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">Sports</h3>
-              <Carousel className="gap-4 px-8">
-                <CarouselContent>
-                {sportsImage.map((sport, index) => (
-                  <CarouselItem key={index} className="w-full md:basis-1/2 lg:basis-1/3">
-                    <div className="relative">
-                      <Image
-                        src={sport}
-                        alt={sport}
-                        className="w-full h-96 object-cover rounded-md"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 rounded-b-md py-2 px-4">
-                        <h4 className="text-white text-lg font-semibold">{college.sports[index]}</h4>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
+                <SportsCarousel sportsImage={sportsImage} college={college} />
             </div>
           </div>
         </div>
