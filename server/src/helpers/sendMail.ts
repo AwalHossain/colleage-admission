@@ -3,7 +3,8 @@ import nodemailer from 'nodemailer';
 
 
 const sendMail = async (email:string,subject:string,text:string)=>{
-
+    console.log(email,subject,text,"checke ");
+    
     const transporter = nodemailer.createTransport({
       host: "smtp.yandex.com",
       port: 465,
