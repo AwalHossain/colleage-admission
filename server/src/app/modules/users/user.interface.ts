@@ -10,6 +10,8 @@ export type IUser = {
   token?: string;
   photoURL?: string;
   myCollege?: string;
+  address?: string;
+  university?: string;
 };
 
 export type UserPref = {
