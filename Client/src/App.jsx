@@ -43,7 +43,6 @@ const queryClient = new QueryClient();
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/colleges" element={<Colleges />} />
-              <Route path="/colleges/:collegeId" element={<CollegeDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/sign-in" element={<SignInPage />} />
               <Route path="/sign-up" element={<SignUpPage />} />
@@ -55,6 +54,7 @@ const queryClient = new QueryClient();
               <Route path="/admission" element={<Admission />} />
             <Route path="/my-college" element={<MyCollege />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/colleges/:collegeId" element={<CollegeDetails />} />
           </Route>
           {/* not found */}
               <Route path="*" element={<NotFound />} />
