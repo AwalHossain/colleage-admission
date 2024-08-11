@@ -70,7 +70,7 @@ const getAdmission = catchAsync(async (req: Request, res: Response) => {
     const admissionData = req.body;
     const userId = req?.user?._id;
     console.log(admissionData, 'admissionData',userId, 'userId');
-    const result = await Admission.find().populate('college').lean();
+    const result = await Admission.find({user: userId}).populate('college').lean();
 
     sendResponse(res, {
         statusCode: 200,
