@@ -30,7 +30,13 @@ const authSchema = new Schema<IUser>({
   myCollege:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Admission',
-  }]
+  }],
+  address:{
+    type:String,
+  },
+  university:{
+    type: String,
+  }
 },
 {
   timestamps: true,
