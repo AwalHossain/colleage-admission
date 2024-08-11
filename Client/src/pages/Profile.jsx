@@ -4,18 +4,23 @@ import { updateProfile } from '../services/ProfileService'
 import useAuth from '../zustand/authStore'
 
 const Profile = () => {
-  const {user:profile} = useAuth()
+  const {user:profile,setUser} = useAuth()
   console.log(profile,"user");
  const queryClient = useQueryClient()
 //  const { data: profile, isLoading } = useQuery('profile', fetchProfile)
- const { mutate: updateProfileMutation } = useMutation(updateProfile, {
-   onSuccess: () => {
+ const { mutate: updateProfileMutation, } = useMutation(updateProfile, {
+   onSuccess: (data) => {
      queryClient.invalidateQueries('profile')
+     console.log("updated profile",data);
+     
+    //  setUser(profile)
+     setUser(data.data.data);
    },
  })
 
  const [editMode, setEditMode] = useState(false)
  const [formData, setFormData] = useState({
+  id: profile?._id,
    name: '',
    email: '',
    university: '',
@@ -25,6 +30,7 @@ const Profile = () => {
  const handleEditClick = () => {
    setEditMode(true)
    setFormData({
+    id: profile?._id,
      name: profile.name,
      email: profile.email,
      university: profile.university,
