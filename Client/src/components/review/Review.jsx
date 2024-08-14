@@ -29,9 +29,9 @@ const Reviews = () => {
             {isLoading ? (
               <p>Loading reviews...</p>
             ) : (
-              reviews?.map((review) => (
+              reviews?.map((review,index) => (
                 <CarouselItem
-                  key={review.id}
+                  key={index}
                   className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
                   <div className="bg-white shadow-lg rounded-lg overflow-hidden h-full flex flex-col">
