@@ -61,7 +61,7 @@ export const senResetLink = async (email) => {
 export const resetPassword = async (password, id, token) => {
   try {
     const response = await axios.post(
-      `${BASE_API_URL}/auth/reset-password/${id}/${token}`,
+      `${BASE_API_URL}/auth/reset-password/${id}`,
       {
         password,
       }
