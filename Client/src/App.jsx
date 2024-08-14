@@ -49,12 +49,14 @@ const queryClient = new QueryClient();
               <Route path="/sign-up/verify-email-address" element={<SignUpPage routing="virtual" />} />
               <Route path="/sign-in/factor-one" element={<SignInPage routing="virtual" />} />
               <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
+
                 {/* private Routes */}
                 <Route element={<PrivateRoutes />}>
               <Route path="/admission" element={<Admission />} />
             <Route path="/my-college" element={<MyCollege />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/colleges/:collegeId" element={<CollegeDetails />} />
+            <Route path="/reset" element={<ResetPassword />} />
           </Route>
           {/* not found */}
               <Route path="*" element={<NotFound />} />
