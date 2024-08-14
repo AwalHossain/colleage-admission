@@ -126,7 +126,6 @@ const verifyToken = catchAsync( async (req: Request, res: Response) => {
 
   const user = await User.findOne({
       _id: req.params.id,
-      token: req.params.token,
   });
 
   console.log(user, 'user', req.params.id, req.params.token);
