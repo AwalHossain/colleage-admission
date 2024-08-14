@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { resetPassword } from "../../services/authService";
+import useAuth from "../../zustand/authStore";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -9,7 +9,7 @@ export default function ResetPassword() {
   const [isReset, setIsReset] = useState(false);
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { id, token } = useParams();
+  const { user } = useAuth();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export default function ResetPassword() {
       }
       // Add your password reset logic here
       // E.g., sending the new password to your backend server
-      const res = await resetPassword(password, id, token);
+      const res = await resetPassword(password, user._id);
       console.log(res, "res from login");
       if (res.data.statusCode === 200) {
           setIsReset(true);
