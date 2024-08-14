@@ -34,7 +34,7 @@ router.post(
 );
 
 router.post(
-  '/reset-password/:id/:token',
+  '/reset-password/:id',
   UserController.verifyToken
 );
 
