@@ -3,12 +3,12 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 
 export default function SportsCarousel({sportsImage, college}) {
     return (
-        <Carousel className="gap-4 px-8">
+        <Carousel className="gap-4  overflow-hidden">
             <CarouselContent>
                 {sportsImage.map((sport, index) => (
                               <CarouselItem
                               key={index}
-                              className="basis-1/3 sm:basis-1/4 md:basis-1/4 lg:basis-1/5  xl:basis-1/5 max-w-[48rem] mx-auto"
+                              className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/4  xl:basis-1/5 max-w-[52rem] mx-auto"
                               style={{
                                 fontFamily: "Montserrat,serif",
                               }}
