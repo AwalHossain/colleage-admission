@@ -95,7 +95,7 @@ const CollegeDetails = () => {
                   key={index}
                   src={image}
                   alt={`${college.name} ${index}`}
-                  className="h-24 w-auto cursor-pointer rounded-md"
+                  className="h-8 sm:h-24 w-auto cursor-pointer rounded-md"
                   onClick={() => setMainImage(image)}
                   loading='lazy'
                 />
@@ -131,10 +131,10 @@ const CollegeDetails = () => {
                     <Image
                       src={event}
                       alt={event}
-                      className="w-full h-48 object-cover rounded-md"
+                      className="w-full h-32 sm:h-48 object-cover rounded-md"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-50 rounded-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <h4 className="text-white text-lg font-semibold">{college.events[index]}</h4>
+                      <h4 className="text-white text-sm sm:text-lg font-semibold">{college.events[index]}</h4>
                     </div>
                   </div>
                 ))}
