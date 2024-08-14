@@ -3,6 +3,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { Github } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Spinner } from '../lib/loading';
 import { setToLocalStorage } from '../lib/local-storage';
 import { fetchSocialLogin } from '../services/authService';
@@ -80,6 +81,7 @@ const SocialMediaLogin = () => {
           console.log(error,'check');
           const errorCode = error.code;
           const errorMessage = error.message;
+          toast.error(errorMessage)
           // The email of the user's account used.
           const email = error.email;
           // The firebase.auth.AuthCredential type that was used.
