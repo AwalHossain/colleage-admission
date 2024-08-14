@@ -225,6 +225,44 @@ export default function Navbar({ isNavOpen, setIsNavOpen }) {
           >
             Profile
           </NavLink>
+          {signedIn ? (
+                      <>
+                       
+
+                        {/* User Dropdown */}
+                        <DropdownMenu>
+                          <DropdownMenuTrigger>
+                            <img
+                              className="h-8 w-8 rounded-full"
+                              src={
+                                user?.photoURL || "https://i.ibb.co/SX0CJQ7/blank-profile-picture-973460-1280.png"
+                              }
+                              alt="avatar"
+                            />
+                          </DropdownMenuTrigger>
+
+                          <DropdownMenuPortal>
+                            <DropdownMenuContent className="bg-white rounded-md shadow-lg p-2">
+                              <DropdownMenuItem
+                                onClick={logout}
+                                className="cursor-pointer text-sm text-gray-700 hover:bg-gray-100 px-4 py-2"
+                              >
+                                Sign out
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenuPortal>
+                        </DropdownMenu>
+                      </>
+                    ) : (
+                      <NavLink to="/sign-in">
+                        <button
+                          type="button"
+                          className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                        >
+                          Sign In
+                        </button>
+                      </NavLink>
+                    )}
         </div>
       </div>
     </nav>
