@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 import { updateProfile } from '../services/ProfileService'
 import useAuth from '../zustand/authStore'
 
 const Profile = () => {
   const {user:profile,setUser} = useAuth()
+  const navigate = useNavigate();
   console.log(profile,"user");
  const queryClient = useQueryClient()
 //  const { data: profile, isLoading } = useQuery('profile', fetchProfile)
@@ -172,6 +174,7 @@ const Profile = () => {
                        </button>
                      </div>
                    ) : (
+                    <div className='space-x-4'> 
                      <button
                        type="button"
                        onClick={handleEditClick}
@@ -179,6 +182,14 @@ const Profile = () => {
                      >
                        Edit
                      </button>
+                     <button
+                       type="button"
+                       onClick={()=> navigate("/reset") }
+                       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                     >
+                       Reset Password
+                     </button>
+                    </div>
                    )}
                  </div>
                </div>
