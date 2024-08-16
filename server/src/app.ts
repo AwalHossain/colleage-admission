@@ -9,9 +9,9 @@ import cookieParser from 'cookie-parser';
 const app: Application = express();
 
 const allowedOrigins = [
-  'https://bookishly.netlify.app',
-  'https://oceanlibrary.netlify.app',
-  'http://localhost:5173'
+  'https://admission-college.netlify.app',
+  'http://localhost:5173',
+  'https://college-frontend-xi.vercel.app'
 ]
 
 app.use(cors({
