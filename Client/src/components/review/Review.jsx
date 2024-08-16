@@ -14,7 +14,7 @@ const Reviews = () => {
   const reviews = data?.data;
 
   return (
-    <div className="mt-12 bg-gray-50 py-16">
+    <div className="my-12 bg-gray-100 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl mb-8">
           What Our Students Say
@@ -35,7 +35,7 @@ const Reviews = () => {
                   className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
                   <div className="bg-white shadow-lg rounded-lg overflow-hidden h-full flex flex-col">
-                    <div className="p-6 flex-grow">
+                    <div className="p-2 sm:p-6 flex-grow">
                       <div className="flex items-center mb-4">
                         <img
                           className="h-12 w-12 rounded-full object-cover mr-4"
@@ -57,7 +57,7 @@ const Reviews = () => {
                       <p className="text-gray-700 mb-4 line-clamp-3">"{review.content}"</p>
                     </div>
                     <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                      <div className="flex items-center">
+                      <div className="md:flex items-center">
                         <div className="flex mr-2">
                           {[...Array(5)].map((_, i) => (
                             <StarIcon
