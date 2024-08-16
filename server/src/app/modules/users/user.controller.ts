@@ -130,8 +130,8 @@ const verifyToken = catchAsync( async (req: Request, res: Response) => {
 
   console.log(user, 'user', req.params.id, req.params.token);
   
-  if (!user?.token)  {
-   throw new ApiError(400, 'Invalid or expired token !');
+  if (!user)  {
+   throw new ApiError(400, 'User not found!');
   }
 
   user.password = req.body.password;
