@@ -22,9 +22,9 @@ This web application provides a user-friendly interface for general users to boo
 - Frontend: React.js
 - Backend: Node.js, Express.js
 - Database: MongoDB
-- Authentication: [Specify the authentication library/service used]
-- Styling: [Specify CSS framework, e.g., Tailwind CSS]
-- Deployment: [Specify the deployment platform used]
+- Authentication: Custom Authentication plus firebase social media login
+- Styling: Tailwind CSS
+- Deployment: Vercel
 
 ## Installation
 
